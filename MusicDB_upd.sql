@@ -29,7 +29,8 @@ issue_date date,
 constraint chk_d check (issue_date  >= '2000-01-01'));
 
 create table if not exists Tracks(
-id int primary key references Albums(id) ,
+id Serial PRIMARY KEY,
+id int NOT NULL references Albums(id) ,
 name VARCHAR(60) not null,
 duration integer not null);
 
