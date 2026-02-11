@@ -32,7 +32,7 @@ create table if not exists Tracks(
 id Serial PRIMARY KEY,
 id int NOT NULL references Albums(id) ,
 name VARCHAR(60) not null,
-duration integer not null);
+duration numeric not null);
 
 create table if not exists Track_Collection(
 Track_id integer references Tracks(id),
