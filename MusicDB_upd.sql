@@ -1,40 +1,40 @@
-create table if not exists Genres(
-id Serial primary key,
-name VARCHAR(60) not null);
+CREATE TABLE IF NOT EXISTS Genres(
+Genre_id SERIAL PRIMARY KEY,
+name VARCHAR(60) NOT NULL);
 
-create table if not exists Singers(
-id Serial primary key,
-name VARCHAR(60) not null);
+CREATE TABLE IF NOT EXISTS Singers(
+Singer_id SERIAL PRIMARY KEY,
+name VARCHAR(60) NOT NULL);
 
-create table if not exists Singer_Genre(
-Genre_id integer REFERENCES Genres(id),
-Singer_id integer references Singers(id),
-constraint PR_K primary key (Genre_id, Singer_id));
+CREATE TABLE IF NOT EXISTS Singer_Genre(
+Genre_id INTEGER REFERENCES Genre(id),
+Singer_id INTEGER REFERENCES Singer(id),
+CONSTRAINT PR_K PRIMARY KEY (Genre_id, Singer_id));
 
-create table if not exists Albums(
-id Serial primary key,
-name VARCHAR(120) not null,
-issue_date date,
-constraint chk_date check (issue_date >= '2000-01-01'));
+CREATE TABLE IF NOT EXISTS Albums(
+Album_id SERIAL PRIMARY KEY,
+name VARCHAR(120) NOT NULL,
+issue_date DATE,
+CONSTRAINT chk_date CHECK (issue_date >= '2000-01-01'));
 
-create table if not exists Album_Singer(
-Singer_id integer references Singers(id),
-Album_id integer references Albums(id),
-constraint PK primary key (Singer_id, Album_id));
+CREATE TABLE IF NOT EXISTS Album_Singer(
+Singer_id INTEGER REFERENCES Singer(id),
+Album_id INTEGER REFERENCES Album(id),
+CONSTRAINT PK PRIMARY KEY (Singer_id, Album_id));
 
-create table if not exists Collections(
-id Serial primary key,
-name VARCHAR(120) not null,
-issue_date date,
-constraint chk_d check (issue_date  >= '2000-01-01'));
+CREATE TABLE IF NOT EXISTS Collections(
+Collection_id SERIAL PRIMARY KEY,
+name VARCHAR(120) NOT NULL,
+issue_date DATE,
+CONSTRAINT chk_d CHECK (issue_date  >= '2000-01-01'));
 
-create table if not exists Tracks(
-id Serial PRIMARY KEY,
-id int NOT NULL references Albums(id) ,
-name VARCHAR(60) not null,
-duration float not null);
+CREATE TABLE IF NOT EXISTS Tracks(
+Track_id SERIAL PRIMARY KEY,
+id INT NOT NULL REFERENCES Album(id) ,
+name VARCHAR(60) NOT NULL,
+duration FLOAT NOT NULL);
 
-create table if not exists Track_Collection(
-Track_id integer references Tracks(id),
-Collection_id integer references Collections(id),
-constraint PK_2 primary key (Track_id, Collection_id));
+CREATE TABLE IF NOT EXISTS Track_Collection(
+Track_id INTEGER REFERENCES Track(id),
+Collection_id INTEGER REFERENCES Collection(id),
+CONSTRAINT PK_2 PRIMARY KEY (Track_id, Collection_id));
