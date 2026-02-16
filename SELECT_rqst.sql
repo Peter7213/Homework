@@ -21,7 +21,7 @@ WHERE s_name NOT LIKE '% %';
 
 
 SELECT t_name														--Название треков, которые содержат слово «мой» или «my».
-FROM tracks t.WHERE t_name ILIKE 'my %'
+FROM tracks t WHERE t_name ILIKE 'my %'
 OR t.t_name ILIKE '% my'
 OR t.t_name ILIKE '% my %'
 OR t.t_name ILIKE 'my';
@@ -69,8 +69,8 @@ FROM albums a
 JOIN album_singer t ON a.album_id = t.album_id
 JOIN singers s ON t.singer_id = s.singer_id
 JOIN singer_genre sg ON s.singer_id = sg.singer_id
-GROUP BY a.a_name   
-HAVING (SELECT COUNT(sg.singer_id) >= 2)
+GROUP BY a.a_name, sg.singer_id 
+HAVING (SELECT COUNT(s.singer_id) >= 2)
 
 
 SELECT t."t_name"															--Наименования треков, которые не входят в сборники.
